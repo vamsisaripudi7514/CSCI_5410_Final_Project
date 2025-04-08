@@ -1,5 +1,6 @@
 -- Disable foreign key checks to allow truncation in any order
 SET FOREIGN_KEY_CHECKS = 0;
+USE AttendanceSystem;
 
 -- Delete all records from AttendanceRecords
 TRUNCATE TABLE AttendanceRecords;
@@ -16,8 +17,10 @@ TRUNCATE TABLE Classes;
 -- Delete all records from Users
 TRUNCATE TABLE Users;
 
+-- Delete all records from UserMaster
+TRUNCATE TABLE UserMaster;
+
 -- Re-enable foreign key checks
 SET FOREIGN_KEY_CHECKS = 1;
-
 
 -- DROP DATABASE IF EXISTS AttendanceSystem;

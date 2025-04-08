@@ -19,7 +19,8 @@ namespace AttendanceSystem.Controllers
         public async Task<IActionResult> GetStudents()
         {
             var query = from o in  _context.Users
-                        where o.Role == "Student"
+                        join master in _context.Usermasters on o.UserId equals master.MasterId
+                        where master.Role == "Student"
                         select new
                         {
                             user_id = o.UserId,

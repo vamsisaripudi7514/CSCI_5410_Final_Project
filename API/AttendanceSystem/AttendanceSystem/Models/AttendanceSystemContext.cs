@@ -26,9 +26,11 @@ public partial class AttendanceSystemContext : DbContext
 
     public virtual DbSet<User> Users { get; set; }
 
+    public virtual DbSet<Usermaster> Usermasters { get; set; }
+
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseMySql("server=localhost;database=AttendanceSystem;user=root;password=root", Microsoft.EntityFrameworkCore.ServerVersion.Parse("8.0.41-mysql"));
+        => optionsBuilder.UseMySql("server=localhost;port=3306;database=AttendanceSystem;user=root;password=root", Microsoft.EntityFrameworkCore.ServerVersion.Parse("8.0.41-mysql"));
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -140,23 +142,41 @@ public partial class AttendanceSystemContext : DbContext
 
             entity.ToTable("users");
 
-            entity.HasIndex(e => e.Email, "email").IsUnique();
-
             entity.HasIndex(e => e.Username, "username").IsUnique();
 
-            entity.Property(e => e.UserId).HasColumnName("user_id");
+            entity.Property(e => e.UserId)
+                .ValueGeneratedNever()
+                .HasColumnName("user_id");
             entity.Property(e => e.CreatedAt)
                 .HasDefaultValueSql("CURRENT_TIMESTAMP")
                 .HasColumnType("timestamp")
                 .HasColumnName("created_at");
-            entity.Property(e => e.Email).HasColumnName("email");
             entity.Property(e => e.PasswordHash)
                 .HasMaxLength(255)
                 .HasColumnName("password_hash");
+            entity.Property(e => e.Username).HasColumnName("username");
+
+            entity.HasOne(d => d.UserNavigation).WithOne(p => p.User)
+                .HasForeignKey<User>(d => d.UserId)
+                .HasConstraintName("users_ibfk_1");
+        });
+
+        modelBuilder.Entity<Usermaster>(entity =>
+        {
+            entity.HasKey(e => e.MasterId).HasName("PRIMARY");
+
+            entity.ToTable("usermaster");
+
+            entity.HasIndex(e => e.Email, "email").IsUnique();
+
+            entity.Property(e => e.MasterId).HasColumnName("master_id");
+            entity.Property(e => e.Email).HasColumnName("email");
+            entity.Property(e => e.FullName)
+                .HasMaxLength(255)
+                .HasColumnName("full_name");
             entity.Property(e => e.Role)
                 .HasColumnType("enum('student','teacher')")
                 .HasColumnName("role");
-            entity.Property(e => e.Username).HasColumnName("username");
         });
 
         OnModelCreatingPartial(modelBuilder);

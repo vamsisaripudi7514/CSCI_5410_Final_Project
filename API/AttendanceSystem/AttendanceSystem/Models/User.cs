@@ -11,10 +11,6 @@ public partial class User
 
     public string PasswordHash { get; set; } = null!;
 
-    public string Email { get; set; } = null!;
-
-    public string Role { get; set; } = null!;
-
     public DateTime? CreatedAt { get; set; }
 
     public virtual ICollection<Attendancerecord> Attendancerecords { get; set; } = new List<Attendancerecord>();
@@ -22,4 +18,6 @@ public partial class User
     public virtual ICollection<Class> Classes { get; set; } = new List<Class>();
 
     public virtual ICollection<Enrollment> Enrollments { get; set; } = new List<Enrollment>();
+
+    public virtual Usermaster UserNavigation { get; set; } = null!;
 }
