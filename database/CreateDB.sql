@@ -8,7 +8,7 @@ CREATE TABLE IF NOT EXISTS UserMaster (
     email VARCHAR(255) NOT NULL UNIQUE,
     role ENUM('student', 'teacher') NOT NULL
 );
---GPT
+--GPT 1
 -- Users table for authentication (stores credentials)
 CREATE TABLE IF NOT EXISTS Users (
     user_id INT PRIMARY KEY,
