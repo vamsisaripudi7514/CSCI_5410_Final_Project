@@ -30,11 +30,9 @@ namespace AttendanceSystem.Controllers
             if (classInfo == null)
                 return NotFound("Class not found.");
 
-            // Total sessions for the class
             int totalSessions = await _context.Attendancesessions
                 .CountAsync(s => s.ClassId == data.classID);
 
-            // Enrolled students
             var enrolledStudents = await _context.Enrollments
                 .Where(e => e.ClassId == data.classID)
                 .Include(e => e.Student)
@@ -45,7 +43,6 @@ namespace AttendanceSystem.Controllers
                 })
                 .ToListAsync();
             QuestPDF.Settings.License = LicenseType.Community;
-            // Attendance records grouped by student
             var attendanceCounts = await _context.Attendancerecords
                 .Where(r => r.Session.ClassId == data.classID && r.Status == "Present")
                 .GroupBy(r => r.StudentId)
@@ -56,7 +53,6 @@ namespace AttendanceSystem.Controllers
                 })
                 .ToListAsync();
 
-            // Construct PDF content
             var pdf = Document.Create(container =>
             {
 
@@ -71,13 +67,12 @@ namespace AttendanceSystem.Controllers
 
                         table.ColumnsDefinition(columns =>
                         {
-                            columns.RelativeColumn(2); // Student ID
-                            columns.RelativeColumn(3); // Name
-                            columns.RelativeColumn(2); // Attendance Count
-                            columns.RelativeColumn(2); // %
+                            columns.RelativeColumn(2); 
+                            columns.RelativeColumn(3); 
+                            columns.RelativeColumn(2); 
+                            columns.RelativeColumn(2); 
                         });
 
-                        // Table header
                         table.Header(header =>
                         {
                             header.Cell().Element(CellStyle).ExtendHorizontal().Text("Student ID").Bold();
@@ -86,7 +81,6 @@ namespace AttendanceSystem.Controllers
                             header.Cell().Element(CellStyle).ExtendHorizontal().Text("Percentage").Bold();
                         });
 
-                        // Table body
                         foreach (var student in enrolledStudents)
                         {
                             int attended = attendanceCounts
