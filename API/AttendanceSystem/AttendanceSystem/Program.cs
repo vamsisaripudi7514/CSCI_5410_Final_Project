@@ -1,5 +1,6 @@
 using AttendanceSystem.Models;
 using Microsoft.EntityFrameworkCore;
+using QuestPDF.Drawing;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,6 +23,8 @@ builder.Services.AddCors(options =>
               .AllowAnyMethod();
     });
 });
+
+
 
 var app = builder.Build();
 

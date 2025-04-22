@@ -2,6 +2,7 @@
 using AttendanceSystem.Models;
 using Microsoft.AspNetCore.Identity.Data;
 using Microsoft.AspNetCore.Mvc;
+using System.Formats.Asn1;
 
 namespace AttendanceSystem.Controllers
 {
@@ -40,6 +41,42 @@ namespace AttendanceSystem.Controllers
                 JWTtoken = "Sample_token" // Need to fill this for JWT
             };
             return Ok(response);
+        }
+
+        [HttpPost("register")]
+        public async Task<IActionResult> UserRegistration([FromBody] UserRegsitrationRequest data)
+        {
+            if(data == null || string.IsNullOrWhiteSpace(data.Username) || string.IsNullOrWhiteSpace(data.Password) || data.UserId <= 0)
+            {
+                return BadRequest("Invalid registration request.");
+            }
+            var alreadyRegistered = _context.Users.FirstOrDefault(u => u.UserId == data.UserId);
+            if (alreadyRegistered != null)
+            {
+                return Conflict("User already registered.");
+            }
+            var existingUser = _context.Users.FirstOrDefault(u => u.Username == data.Username);
+            if (existingUser != null)
+            {
+                return Conflict("Username already exists.");
+            }
+            var existingMaster = _context.Usermasters.FirstOrDefault(u => u.MasterId == data.UserId);
+            if(existingMaster == null)
+            {
+                return Conflict("User records not found. Please Contact the administrative office.");
+            }
+            // create a password hash
+
+            var newUser = new User
+            {
+                UserId = data.UserId,
+                Username = data.Username,
+                PasswordHash = data.Password, //replace it with hashed password
+                CreatedAt = DateTime.Now
+            };
+            _context.Users.Add(newUser);
+            _context.SaveChanges();
+            return Ok("User Registered Successfully!!");
         }
     }
 }
