@@ -39,15 +39,10 @@ namespace AttendanceSystem.Controllers
                 return BadRequest("Excel File Missing!");
             }
 
-            // Check if class already exists
             bool classExists = _context.Classes.Any(c =>
                 c.TeacherId == data.TeacherID && c.ClassName == data.ClassName);
 
-            //if (classExists)
-            //    return Conflict("Class Already Exists!!");
-
-
-            // Step 1: Get student IDs from Excel
+           
             List<int> studentIds;
             try
             {
@@ -58,7 +53,6 @@ namespace AttendanceSystem.Controllers
                 return BadRequest("Error reading Excel file: " + ex.Message);
             }
 
-            // Step 2: Validate IDs against UserMaster table
             var userMasterList =_context.Usermasters
                 .Where(u => u.Role == "student")
                 .ToList();
@@ -102,7 +96,6 @@ namespace AttendanceSystem.Controllers
                 });
 
             }
-            // Step 3: Create new class
             var newClass = new Class
             {
                 ClassName = data.ClassName,
@@ -110,9 +103,8 @@ namespace AttendanceSystem.Controllers
                 CreatedDate = DateTime.Now
             };
             _context.Classes.Add(newClass);
-            await _context.SaveChangesAsync(); // Get generated class_id
+            await _context.SaveChangesAsync(); 
 
-            // Step 4: Enroll valid students
             foreach (int studentId in validIds)
             {
                 _context.Enrollments.Add(new Enrollment
