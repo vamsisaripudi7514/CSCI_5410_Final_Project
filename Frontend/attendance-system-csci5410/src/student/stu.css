@@ -1,0 +1,42 @@
+.one h2{
+    text-align: center;
+    color : red;
+    font-family: algerian;
+
+}
+.one{
+    background-color: rgb(235, 189, 137);
+    width : 100%;
+    padding : 5px;
+}
+
+
+.two{
+    
+    background-color: rgb(126, 214, 231);
+    width : 100%;
+    padding : 5px;
+    display: flex;
+    justify-content: center;
+    gap : 200px;
+}
+.two button {
+    background-color: transparent; 
+    border: none;                  
+    color: black;                  
+    font-weight: bold;
+    font-size: 16px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-radius: 8px;
+  }
+  
+  
+  .two button:nth-child(1):hover {
+    background-color: rgb(29, 207, 109); 
+  }
+  
+  .two button:nth-child(2):hover {
+    background-color: rgb(235, 193, 242); 
+  }

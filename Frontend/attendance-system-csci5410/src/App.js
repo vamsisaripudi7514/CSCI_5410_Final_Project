@@ -16,6 +16,14 @@ function App() {
       </div>
     </Router>
   );
+//     <BrowserRouter>
+//       <Routes>
+//         <Route path="/" element={<Navigate to="/teacher" />} /> 
+//         <Route path="/student" element={<Studentdashboard />} />
+//         <Route path="/teacher" element={<Teacherdashboard />} />
+//         <Route path="/classmanagement" element={<Classdashboard/>} />
+//       </Routes>
+//     </BrowserRouter>
 }
 
 export default App;
