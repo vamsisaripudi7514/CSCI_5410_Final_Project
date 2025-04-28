@@ -1,0 +1,103 @@
+
+
+.manage_class {
+    height: 100vh; 
+    overflow: hidden; 
+    padding: 2rem;
+    position: relative;
+    background: linear-gradient(to right, #c3dafe, #e9d5ff, #fbcfe8);
+    background-attachment: fixed;
+    background-size: cover;
+  }
+  .manage_class h2{
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #6b21a8;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+  }
+  
+  .addclass {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 2rem;
+  }
+  
+  .class_form {
+    background-color: #ffffff;
+    padding: 2rem;
+    border-radius: 1.5rem;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  
+  
+  .classselect {
+    padding: 0.75rem;
+    border: 1px solid #d1d5db;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    outline: none;
+    transition: box-shadow 0.3s ease;
+  }
+  
+  .classselect:focus {
+    box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.4);
+  }
+  
+  .submit_button {
+    background-color: #8b5cf6;
+    color: white;
+    font-weight: 600;
+    padding: 0.75rem;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+  }
+  
+  .submit_button:hover {
+    background-color: #7c3aed;
+  }
+  .logout {
+    position: absolute;
+    top: 1.5rem;
+    right: 2rem;
+    background-color: #a3fdda;
+    color : black;
+    font-weight: 600;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 0.75rem;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+  }
+  
+  .logout:hover {
+    background-color: red;
+  }
+  .generate_report {
+    margin-top: 6rem; /* push it lower */
+    margin-left: 2rem; /* align it toward left */
+  }
+  
+  .report_form {
+    background-color: #ffffff;
+    padding: 2rem;
+    border-radius: 1.5rem;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  
