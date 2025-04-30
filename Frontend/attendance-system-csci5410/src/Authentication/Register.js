@@ -1,6 +1,7 @@
 import "./Register.css";
 import React, { useState } from "react";
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 function Register() {
   const [formData, setFormData] = useState({
@@ -8,14 +9,48 @@ function Register() {
     username: "",
     password: "",
   });
-
+  const [message, setMessage] = useState("");
+  const navigate = useNavigate();
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Registration Data Submitted:", formData);
+    try{
+      const result = await fetch("http://localhost:5092/Auth/register",{
+        method: "POST",
+        headers:{
+          "Content-Type": "application/json",
+        },
+        body:JSON.stringify({
+          userId: formData.mid,
+          username: formData.username,
+          password: formData.password
+        })
+      });
+      const data = await result.json();
+      console.log(data);
+      if(data.message !== null && data.message !== "User Registered Successfully!!"){
+        setMessage(data.message);
+        console.log("Registration failed. Please try again.");
+        console.log(data.message);
+        return;
+      }
+
+      console.log(data);
+      // await new Promise((resolve) => setTimeout(resolve, 2000)); // Simulate a delay
+      navigate("/",{
+        state: {
+          isRegistered: true
+        }
+      });
+    }
+    catch(error){
+      setMessage("Registration failed. Please try again.");
+      console.error("Error during registration:", error);
+    }
+
   };
 
   return (
@@ -62,10 +97,10 @@ function Register() {
           />
         </div>
 
-        <button type="submit" className="form-button">
+        <button type="submit" className="btn btn-primary">
           Submit
         </button>
-
+        {message && <p style={{color:"red"}}>{message}</p>}
         <p>
           Already have an account? <Link to="/">Login</Link>
         </p>

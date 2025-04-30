@@ -1,8 +1,13 @@
 import './App.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Register from './Register';
-import Login from './Login';
-import MarkAttendance from './MarkAttendance';
+import Register from './Authentication/Register';
+import Login from './Authentication/Login';
+import MarkAttendance from './teacher/MarkAttendance';
+import TeacherDashboard from './teacher/TeacherDashboard';
+import StudentDashboard from './student/StudentDasboard';
+import ClassAttendance from './student/ClassAttendance';
+import AttendanceDisplay from './student/AttendanceDisplay';
+import ClassManagement from './teacher/ClassManagement';
 
 function App() {
   return (
@@ -12,6 +17,12 @@ function App() {
           <Route path="/" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/attendance" element={<MarkAttendance />} />
+          <Route path ="/teacher" element={<TeacherDashboard/>}/>
+          <Route path="/student" element={<StudentDashboard/>} />
+          <Route path="/student-attendance-check" element={<ClassAttendance/>} />
+          <Route path="/student-attendance-display" element={<AttendanceDisplay/>} />
+          <Route path="/class-management" element={<ClassManagement/>} />
+          <Route path="/mark-attendance" element={<MarkAttendance/>} />
         </Routes>
       </div>
     </Router>
