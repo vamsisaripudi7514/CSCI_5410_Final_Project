@@ -2,6 +2,7 @@ import react, { use } from "react";
 import TeacherHeader from "./TeacherHeader";
 import { useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 function ClassManagement() {
     const location = useLocation();
     const {
@@ -77,8 +78,8 @@ function ClassManagement() {
         }
     }
     async function handleDeleteClass(classId) {
-        try{
-            const response = await fetch("http://localhost:5092/classes/delete-class",{
+        try {
+            const response = await fetch("http://localhost:5092/classes/delete-class", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -89,7 +90,7 @@ function ClassManagement() {
                     teacherID: userId
                 })
             });
-            if(!response.ok){
+            if (!response.ok) {
                 console.error("Failed to delete class:", response.statusText);
                 return;
             }
@@ -97,7 +98,7 @@ function ClassManagement() {
             console.log("Class deleted:", data);
             fetchClasses();
         }
-        catch(error){
+        catch (error) {
             console.error("Error deleting class:", error);
         }
     }
@@ -129,25 +130,16 @@ function ClassManagement() {
                             onChange={(e) => { setSearchTerm(e.target.value) }} />
 
                     </div>
-                    {/* <div className="float-right" style={{ marginBottom: "10px" }}>
-                        {employee_add_button &&
-                            <Link to="/employee-add" className="btn btn-primary"
+                    <div className="float-right" style={{ marginBottom: "10px", marginTop: "10px" }}>
+                            <Link to="/create-class" className="btn btn-primary"
                                 state={{
-                                    employee_name,
-                                    employee_id,
-                                    token,
-                                    employee_header_button,
-                                    employee_add_button,
-                                    employee_update_button,
-                                    project_header_button,
-                                    project_add_button,
-                                    project_update_button,
-                                    audit_header_button
+                                    tokenn: token,
+                                    userId: userId,
+                                    username: username,
+                                    role: role
                                 }}
-                            >Add Employee</Link>
-                        }
-                        
-                    </div> */}
+                            >Add Class</Link>
+                    </div>
 
                 </form>
             </div>
@@ -172,7 +164,7 @@ function ClassManagement() {
                                         Generate Report</button>
 
                                     <button className="btn btn-sm btn-danger" style={{ marginLeft: "10px" }}
-                                        onClick={() => {handleDeleteClass(class_name.classId)}}>
+                                        onClick={() => { handleDeleteClass(class_name.classId) }}>
 
                                         Delete</button>
                                 </td>
