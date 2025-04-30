@@ -68,6 +68,7 @@ namespace AttendanceSystem.Controllers
                         select new
                         {
                             session_id = records.SessionId,
+                            session_date = sessions.SessionDate,
                             status = records.Status
                         };
 

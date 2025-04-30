@@ -48,22 +48,22 @@ namespace AttendanceSystem.Controllers
         {
             if(data == null || string.IsNullOrWhiteSpace(data.Username) || string.IsNullOrWhiteSpace(data.Password) || data.UserId <= 0)
             {
-                return BadRequest("Invalid registration request.");
+                return BadRequest(new { message = "Invalid registration request." });
             }
             var alreadyRegistered = _context.Users.FirstOrDefault(u => u.UserId == data.UserId);
             if (alreadyRegistered != null)
             {
-                return Conflict("User already registered.");
+                return Ok(new { message = "User already registered." });
             }
             var existingUser = _context.Users.FirstOrDefault(u => u.Username == data.Username);
             if (existingUser != null)
             {
-                return Conflict("Username already exists.");
+                return Ok(new { message = "Username already exists." });
             }
             var existingMaster = _context.Usermasters.FirstOrDefault(u => u.MasterId == data.UserId);
             if(existingMaster == null)
             {
-                return Conflict("User records not found. Please Contact the administrative office.");
+                return Ok(new { message = "User records not found. Please Contact the administrative office." });
             }
             // create a password hash
 
@@ -76,7 +76,7 @@ namespace AttendanceSystem.Controllers
             };
             _context.Users.Add(newUser);
             _context.SaveChanges();
-            return Ok("User Registered Successfully!!");
+            return Ok(new { message = "User Registered Successfully!!"});
         }
     }
 }
