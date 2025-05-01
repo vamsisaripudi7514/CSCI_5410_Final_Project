@@ -3,8 +3,10 @@ import TeacherHeader from "./TeacherHeader";
 import { useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 function ClassManagement() {
     const location = useLocation();
+    const navigate = useNavigate();
     const {
         token,
         userId,
@@ -78,6 +80,9 @@ function ClassManagement() {
         }
     }
     async function handleDeleteClass(classId) {
+        if (!window.confirm("Are you sure you want to delete this class?")) {
+            return;
+        }
         try {
             const response = await fetch("http://localhost:5092/classes/delete-class", {
                 method: "POST",
@@ -101,6 +106,18 @@ function ClassManagement() {
         catch (error) {
             console.error("Error deleting class:", error);
         }
+    }
+    function handleMarkAttendance(classId) {
+        console.log("Marking attendance for class ID:", classId);
+        navigate("/mark-attendance", {
+            state: {
+                token: token,
+                userId: userId,
+                username: username,
+                role: role,
+                classId: classId
+            }
+        });
     }
 
     return (
@@ -131,14 +148,14 @@ function ClassManagement() {
 
                     </div>
                     <div className="float-right" style={{ marginBottom: "10px", marginTop: "10px" }}>
-                            <Link to="/create-class" className="btn btn-primary"
-                                state={{
-                                    tokenn: token,
-                                    userId: userId,
-                                    username: username,
-                                    role: role
-                                }}
-                            >Add Class</Link>
+                        <Link to="/create-class" className="btn btn-primary"
+                            state={{
+                                tokenn: token,
+                                userId: userId,
+                                username: username,
+                                role: role
+                            }}
+                        >Add Class</Link>
                     </div>
 
                 </form>
@@ -158,10 +175,15 @@ function ClassManagement() {
                                 <td>{class_name.classId}</td>
                                 <td>{class_name.className}</td>
                                 <td>
-                                    <button className="btn btn-sm btn-primary"
+                                    <button className="btn btn-sm btn-success" style={{ marginLeft: "10px" }}
+                                        onClick={() => { handleMarkAttendance(class_name.classId) }}>
+
+                                        Mark Attendance</button>
+                                    <button className="btn btn-sm btn-primary" style={{ marginLeft: "10px" }}
                                         onClick={() => { handleGenerateReport(class_name.classId) }}>
 
                                         Generate Report</button>
+
 
                                     <button className="btn btn-sm btn-danger" style={{ marginLeft: "10px" }}
                                         onClick={() => { handleDeleteClass(class_name.classId) }}>

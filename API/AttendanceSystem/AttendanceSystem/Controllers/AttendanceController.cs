@@ -69,5 +69,43 @@ namespace AttendanceSystem.Controllers
 
         }
 
+        [HttpPost("get-students")]
+        public async Task<IActionResult> GetClassStudents([FromBody] GetClassStudentsDTO data)
+        {
+            if (data == null)
+            {
+                return BadRequest("Invalid Request!!");
+            }
+            if (data.classId == null)
+            {
+                return BadRequest("Class ID not provided!!");
+            }
+            var class_check = from classes in _context.Classes
+                              where classes.ClassId == data.classId
+                              select new
+                              {
+                                  class_id = classes.ClassId
+                              };
+            var class_check_data = class_check.ToList();
+            if (class_check_data == null || !class_check_data.Any())
+            {
+                return BadRequest("Class Not Found!");
+            }
+            var query = from enrollments in _context.Enrollments
+                               join users in _context.Users on enrollments.StudentId equals users.UserId
+                               join masterusers in _context.Usermasters on users.UserId equals masterusers.MasterId
+                               where enrollments.ClassId == data.classId
+                               select new
+                               {
+                                   full_name = masterusers.FullName,
+                                   student_id = enrollments.StudentId,
+                               };
+            var student_data = query.ToList();
+            if(student_data == null || !student_data.Any())
+            {
+                return Ok("No Students Enrolled!");
+            }
+            return Ok(student_data);
+        }
     }
 }
