@@ -125,7 +125,7 @@ function AttendanceDisplay() {
                                 <div className="col-lg-3 col-6">
                                     <div className="small-box bg-danger">
                                         <div className="inner">
-                                            <h3 style={{marginTop:"15px"}}>{analytics && analytics.attendance_percentage}<sup>%</sup></h3>
+                                            <h3 style={{marginTop:"15px"}}>{analytics && parseInt(analytics.attendance_percentage)}<sup>%</sup></h3>
 
                                             <p>Attendance Percentage</p>
                                         </div>
