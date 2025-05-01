@@ -34,7 +34,7 @@ function TeacherHeader({ token, userId, username, role }) {
                             CLASS MANAGEMENT
                         </Link>
                     </li>
-                    <li className="nav-item">
+                    {/* <li className="nav-item">
                         <Link to="/mark-attendance" className="nav-link"
                             state={{
                                 token: token,
@@ -45,7 +45,7 @@ function TeacherHeader({ token, userId, username, role }) {
                         >
                             MARK ATTENDANCE
                         </Link>
-                    </li>
+                    </li> */}
 
                     <li className="nav-item" style={{ marginLeft: "auto" }}>
                         <Link to="/" className="nav-link"
