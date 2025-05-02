@@ -13,6 +13,7 @@ function ClassManagement() {
         username,
         role
     } = location.state || {};
+    console.log("Class Management", token);
     useEffect(() => {
         fetchClasses();
     }, []);
@@ -22,7 +23,7 @@ function ClassManagement() {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                    Authorization: `Bearer ${token}`
+                    'Authorization': token
                 },
                 body: JSON.stringify({
                     teacherId: userId
@@ -59,7 +60,7 @@ function ClassManagement() {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                    Authorization: `Bearer ${token}`
+                    Authorization: token
                 },
                 body: JSON.stringify({
                     classID: classId
@@ -88,7 +89,7 @@ function ClassManagement() {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                    Authorization: `Bearer ${token}`
+                    Authorization: token
                 },
                 body: JSON.stringify({
                     classID: classId,
@@ -150,7 +151,7 @@ function ClassManagement() {
                     <div className="float-right" style={{ marginBottom: "10px", marginTop: "10px" }}>
                         <Link to="/create-class" className="btn btn-primary"
                             state={{
-                                tokenn: token,
+                                token: token,
                                 userId: userId,
                                 username: username,
                                 role: role

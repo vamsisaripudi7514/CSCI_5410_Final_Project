@@ -45,11 +45,15 @@ const Login = () => {
         return;
       }
       const data = await response.json();
+      const tokenLength = data.jwTtoken?.length;
+      console.log("Token Length", tokenLength);
+      const new_token = "Bearer " + data.jwTtoken;
+      console.log("new_token", new_token);
       console.log(data);
       if(data.role === "teacher"){
         navigate("/teacher",{
           state:{
-            token: data.jwTtoken,
+            token: new_token,
             userId: data.userId,
             username: form.username,
             role: data.role
@@ -59,7 +63,7 @@ const Login = () => {
       else if(data.role === "student"){
         navigate("/student",{
           state:{
-            token: data.jwTtoken,
+            token: new_token,
             userId: data.userId,
             username: form.username,
             role: data.role

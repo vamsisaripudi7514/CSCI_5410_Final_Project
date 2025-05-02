@@ -7,11 +7,12 @@ function ClassAttendance() {
     const navigate = useNavigate();
     useEffect(() => {
         async function fetchData() {
+            console.log("token", token);
             const result = await fetch("http://localhost:5092/Students/get-student-classes", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                    Authorization: `Bearer ${token}`
+                    Authorization: token
                 },
                 body: JSON.stringify({
                     studentId: userId
