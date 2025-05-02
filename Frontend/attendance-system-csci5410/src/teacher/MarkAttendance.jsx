@@ -24,7 +24,7 @@ function MarkAttendance() {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
-                        Authorization: `Bearer ${token}`
+                        Authorization: token
                     },
                     body: JSON.stringify({
                         classId: classId
@@ -69,7 +69,7 @@ function MarkAttendance() {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                    Authorization: `Bearer ${token}`
+                    Authorization: token
                 },
                 body: JSON.stringify({
                     classID: classId,

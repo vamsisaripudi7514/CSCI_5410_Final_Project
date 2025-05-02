@@ -19,7 +19,7 @@ function AttendanceDisplay() {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                    Authorization: `Bearer ${token}`
+                    Authorization: token
                 },
                 body: JSON.stringify({
                     studentId: userId,
@@ -40,7 +40,7 @@ function AttendanceDisplay() {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                    Authorization: `Bearer ${token}`
+                    Authorization: token
                 },
                 body: JSON.stringify({
                     studentId: userId,

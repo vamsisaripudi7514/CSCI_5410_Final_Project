@@ -28,11 +28,12 @@ function ClassAdd() {
         formData.append("teacherId", userId);
         formData.append("excelFile", excelFile);
         try {
+            console.log(token);
             const response = await fetch("http://localhost:5092/classes/create-class", {
                 method: "POST",
                 headers: {
                     // contentType: "multipart/form-data",
-                    Authorization: `Bearer ${token}`
+                    Authorization: token
                 },
                 body: formData
             });
