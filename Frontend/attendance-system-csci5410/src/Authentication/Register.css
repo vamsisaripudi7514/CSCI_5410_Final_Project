@@ -1,4 +1,3 @@
-/* Background Setup */
 body {
   margin: 0;
   padding: 0;
@@ -10,7 +9,6 @@ body {
   justify-content: center;
 }
 
-/* Registration Card */
 .register-container {
   background-color: #ffffff;
   border-radius: 20px;
@@ -22,7 +20,6 @@ body {
   margin-top: 150px;
 }
 
-/* Title */
 .form-title {
   text-align: center;
   color: #1a3e72;
@@ -31,7 +28,6 @@ body {
   font-weight: 700;
 }
 
-/* Group Wrapper */
 .form-group {
   display: flex;
   align-items: center;
@@ -39,7 +35,6 @@ body {
   margin-bottom: 20px;
 }
 
-/* Label Styling */
 .form-label {
   flex: 1;
   font-weight: 600;
@@ -50,7 +45,6 @@ body {
   min-width: 90px;
 }
 
-/* Input Field Styling */
 .form-input {
   flex: 2;
   padding: 14px 16px;
@@ -70,7 +64,6 @@ body {
 
 
 
-/* Bottom Text */
 p {
   text-align: center;
   margin-top: 20px;
@@ -84,6 +77,3 @@ a {
   font-weight: 500;
 }
 
-/* a:hover {
-  text-decoration: underline;
-} */

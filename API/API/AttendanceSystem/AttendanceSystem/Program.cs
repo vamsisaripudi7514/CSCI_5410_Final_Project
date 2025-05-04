@@ -20,7 +20,6 @@ JwtHelper.strIssuer = configuration.GetValue<string>("Jwt:Issuer")!;
 JwtHelper.strAudince = configuration.GetValue<string>("Jwt:Audience")!;
 #endregion
 
-//  MySQL DbContext
 builder.Services.AddDbContext<AttendanceSystemContext>(options =>
     options.UseMySql(
         configuration.GetConnectionString("DefaultConnection")!,
@@ -28,7 +27,6 @@ builder.Services.AddDbContext<AttendanceSystemContext>(options =>
     )
 );
 
-//  Session (if you ever use HttpContext.Session)
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession(opts =>
 {
@@ -98,10 +96,8 @@ builder.Services.AddSwaggerGen(c =>
 });
 #endregion
 
-// MVC controllers
 builder.Services.AddControllers();
 
-// CORS for React front-end
 builder.Services.AddCors(opts =>
 {
     opts.AddPolicy("AllowReactApp", p =>
@@ -113,14 +109,12 @@ builder.Services.AddCors(opts =>
 
 var app = builder.Build();
 
-// Enable Swagger in Development
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI(c =>
     {
         c.SwaggerEndpoint("/swagger/v1/swagger.json", "AttendanceSystem API v1");
-        // c.RoutePrefix = ""; // if you want Swagger at root "/"
     });
 }
 
@@ -130,7 +124,6 @@ app.UseSession();
 
 app.UseAuthentication();
 
-// Apply your JWT middleware to *all* non-Swagger requests
 app.UseWhen(
     ctx => !ctx.Request.Path.StartsWithSegments("/swagger"),
     appBuilder => appBuilder.UseMiddleware<JWTMiddleWare>()
