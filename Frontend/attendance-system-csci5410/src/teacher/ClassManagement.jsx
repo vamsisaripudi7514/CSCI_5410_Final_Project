@@ -120,6 +120,18 @@ function ClassManagement() {
             }
         });
     }
+    function handleViewStudents(classId) {
+        navigate("/class-students", {
+            state: {
+                token: token,
+                userId: userId,
+                username: username,
+                role: role,
+                classId: classId
+            }
+        });
+    }
+
 
     return (
         <div className="class-management">
@@ -180,6 +192,9 @@ function ClassManagement() {
                                         onClick={() => { handleMarkAttendance(class_name.classId) }}>
 
                                         Mark Attendance</button>
+                                        <button className="btn btn-sm btn-warning" style={{ marginLeft: "10px" }}
+                                        onClick={() => { handleViewStudents(class_name.classId) }}>
+                                        View Students</button>
                                     <button className="btn btn-sm btn-primary" style={{ marginLeft: "10px" }}
                                         onClick={() => { handleGenerateReport(class_name.classId) }}>
 

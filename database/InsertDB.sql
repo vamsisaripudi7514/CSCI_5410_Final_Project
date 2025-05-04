@@ -1,17 +1,12 @@
 CREATE DATABASE IF NOT EXISTS AttendanceSystem;
 USE AttendanceSystem;
 
--- =========================
--- INSERT INTO UserMaster
--- =========================
 
--- Insert teacher records into UserMaster
 INSERT INTO UserMaster (master_id, full_name, email, role) VALUES 
     (30001, 'Teacher 1', 'teacher1@example.com', 'teacher'),
     (30002, 'Teacher 2', 'teacher2@example.com', 'teacher'),
     (30003, 'Teacher 3', 'teacher3@example.com', 'teacher');
 
--- Insert student records into UserMaster for Teacher 1's class
 INSERT INTO UserMaster (master_id, full_name, email, role) VALUES 
     (50001, 'Student 1_1', 'student1_1@example.com', 'student'),
     (50002, 'Student 1_2', 'student1_2@example.com', 'student'),
@@ -24,7 +19,6 @@ INSERT INTO UserMaster (master_id, full_name, email, role) VALUES
     (50009, 'Student 1_9', 'student1_9@example.com', 'student'),
     (50010, 'Student 1_10', 'student1_10@example.com', 'student');
 
--- Insert student records into UserMaster for Teacher 2's class
 INSERT INTO UserMaster (master_id, full_name, email, role) VALUES 
     (50011, 'Student 2_1', 'student2_1@example.com', 'student'),
     (50012, 'Student 2_2', 'student2_2@example.com', 'student'),
@@ -37,7 +31,6 @@ INSERT INTO UserMaster (master_id, full_name, email, role) VALUES
     (50019, 'Student 2_9', 'student2_9@example.com', 'student'),
     (50020, 'Student 2_10', 'student2_10@example.com', 'student');
 
--- Insert student records into UserMaster for Teacher 3's class
 INSERT INTO UserMaster (master_id, full_name, email, role) VALUES 
     (50021, 'Student 3_1', 'student3_1@example.com', 'student'),
     (50022, 'Student 3_2', 'student3_2@example.com', 'student'),
@@ -50,17 +43,12 @@ INSERT INTO UserMaster (master_id, full_name, email, role) VALUES
     (50029, 'Student 3_9', 'student3_9@example.com', 'student'),
     (50030, 'Student 3_10', 'student3_10@example.com', 'student');
 
--- =========================
--- INSERT INTO Users
--- =========================
 
--- Insert teacher records into Users (for authentication)
 INSERT INTO Users (user_id, username, password_hash) VALUES 
     (30001, 'teacher1', 'hash1'),
     (30002, 'teacher2', 'hash2'),
     (30003, 'teacher3', 'hash3');
 
--- Insert student records into Users for Teacher 1's class
 INSERT INTO Users (user_id, username, password_hash) VALUES
     (50001, 'student1_1', 'hash50001'),
     (50002, 'student1_2', 'hash50002'),
@@ -73,7 +61,6 @@ INSERT INTO Users (user_id, username, password_hash) VALUES
     (50009, 'student1_9', 'hash50009'),
     (50010, 'student1_10', 'hash50010');
 
--- Insert student records into Users for Teacher 2's class
 INSERT INTO Users (user_id, username, password_hash) VALUES
     (50011, 'student2_1', 'hash50011'),
     (50012, 'student2_2', 'hash50012'),
@@ -86,7 +73,6 @@ INSERT INTO Users (user_id, username, password_hash) VALUES
     (50019, 'student2_9', 'hash50019'),
     (50020, 'student2_10', 'hash50020');
 
--- Insert student records into Users for Teacher 3's class
 INSERT INTO Users (user_id, username, password_hash) VALUES
     (50021, 'student3_1', 'hash50021'),
     (50022, 'student3_2', 'hash50022'),
@@ -99,21 +85,15 @@ INSERT INTO Users (user_id, username, password_hash) VALUES
     (50029, 'student3_9', 'hash50029'),
     (50030, 'student3_10', 'hash50030');
 
--- =========================
--- INSERT INTO Classes
--- =========================
 
 INSERT INTO Classes (class_id, class_name, teacher_id) VALUES
     (1001, 'Class 1', 30001),
     (1002, 'Class 2', 30002),
     (1003, 'Class 3', 30003);
 
--- =========================
--- INSERT INTO Enrollments
--- =========================
+
 
 INSERT INTO Enrollments (enrollment_id, class_id, student_id) VALUES
-    -- Enrollments for Class 1 (teacher 30001)
     (1, 1001, 50001),
     (2, 1001, 50002),
     (3, 1001, 50003),
@@ -125,7 +105,6 @@ INSERT INTO Enrollments (enrollment_id, class_id, student_id) VALUES
     (9, 1001, 50009),
     (10, 1001, 50010),
     
-    -- Enrollments for Class 2 (teacher 30002)
     (11, 1002, 50011),
     (12, 1002, 50012),
     (13, 1002, 50013),
@@ -137,7 +116,6 @@ INSERT INTO Enrollments (enrollment_id, class_id, student_id) VALUES
     (19, 1002, 50019),
     (20, 1002, 50020),
     
-    -- Enrollments for Class 3 (teacher 30003)
     (21, 1003, 50021),
     (22, 1003, 50022),
     (23, 1003, 50023),
@@ -149,28 +127,20 @@ INSERT INTO Enrollments (enrollment_id, class_id, student_id) VALUES
     (29, 1003, 50029),
     (30, 1003, 50030);
 
--- =========================
--- INSERT INTO AttendanceSessions
--- =========================
+
 
 INSERT INTO AttendanceSessions (session_id, class_id, session_date, notes) VALUES
-    -- Sessions for Class 1 (Class 1001)
     (2001, 1001, '2025-04-01 09:00:00', 'Session 1 for Class 1'),
     (2002, 1001, '2025-04-02 09:00:00', 'Session 2 for Class 1'),
     
-    -- Sessions for Class 2 (Class 1002)
     (2003, 1002, '2025-04-01 10:00:00', 'Session 1 for Class 2'),
     (2004, 1002, '2025-04-02 10:00:00', 'Session 2 for Class 2'),
     
-    -- Sessions for Class 3 (Class 1003)
     (2005, 1003, '2025-04-01 11:00:00', 'Session 1 for Class 3'),
     (2006, 1003, '2025-04-02 11:00:00', 'Session 2 for Class 3');
 
--- =========================
--- INSERT INTO AttendanceRecords
--- =========================
 
--- AttendanceRecords for Class 1, Session 2001
+
 INSERT INTO AttendanceRecords (record_id, session_id, student_id, status) VALUES
     (3001, 2001, 50001, 'Present'),
     (3002, 2001, 50002, 'Present'),
@@ -183,7 +153,6 @@ INSERT INTO AttendanceRecords (record_id, session_id, student_id, status) VALUES
     (3009, 2001, 50009, 'Present'),
     (3010, 2001, 50010, 'Present');
 
--- AttendanceRecords for Class 1, Session 2002
 INSERT INTO AttendanceRecords (record_id, session_id, student_id, status) VALUES
     (3011, 2002, 50001, 'Absent'),
     (3012, 2002, 50002, 'Present'),
@@ -196,7 +165,6 @@ INSERT INTO AttendanceRecords (record_id, session_id, student_id, status) VALUES
     (3019, 2002, 50009, 'Absent'),
     (3020, 2002, 50010, 'Present');
 
--- AttendanceRecords for Class 2, Session 2003
 INSERT INTO AttendanceRecords (record_id, session_id, student_id, status) VALUES
     (3021, 2003, 50011, 'Present'),
     (3022, 2003, 50012, 'Present'),
@@ -209,7 +177,6 @@ INSERT INTO AttendanceRecords (record_id, session_id, student_id, status) VALUES
     (3029, 2003, 50019, 'Present'),
     (3030, 2003, 50020, 'Present');
 
--- AttendanceRecords for Class 2, Session 2004
 INSERT INTO AttendanceRecords (record_id, session_id, student_id, status) VALUES
     (3031, 2004, 50011, 'Absent'),
     (3032, 2004, 50012, 'Present'),
@@ -222,7 +189,6 @@ INSERT INTO AttendanceRecords (record_id, session_id, student_id, status) VALUES
     (3039, 2004, 50019, 'Absent'),
     (3040, 2004, 50020, 'Present');
 
--- AttendanceRecords for Class 3, Session 2005
 INSERT INTO AttendanceRecords (record_id, session_id, student_id, status) VALUES
     (3041, 2005, 50021, 'Present'),
     (3042, 2005, 50022, 'Present'),
@@ -235,7 +201,6 @@ INSERT INTO AttendanceRecords (record_id, session_id, student_id, status) VALUES
     (3049, 2005, 50029, 'Present'),
     (3050, 2005, 50030, 'Present');
 
--- AttendanceRecords for Class 3, Session 2006
 INSERT INTO AttendanceRecords (record_id, session_id, student_id, status) VALUES
     (3051, 2006, 50021, 'Absent'),
     (3052, 2006, 50022, 'Present'),

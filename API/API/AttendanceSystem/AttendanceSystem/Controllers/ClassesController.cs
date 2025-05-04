@@ -1,4 +1,5 @@
-﻿using AttendanceSystem.Models;
+﻿using AttendanceSystem.DTOs.Attendance;
+using AttendanceSystem.Models;
 using AttendanceSystem.Utility;
 using ClosedXML.Excel;
 using DocumentFormat.OpenXml.Drawing.Charts;
@@ -245,6 +246,30 @@ namespace AttendanceSystem.Controllers
             }
             return data;
         }
+
+        [HttpPost("get-class-students")]
+        public async Task<IActionResult> GetClassStudens([FromBody] GetClassStudentsDTO data)
+        {
+            if(data == null)
+            {
+                return BadRequest("Invalid payload!!");
+            }
+            if(data.classId == null)
+            {
+                return BadRequest("ClassID missing!");
+            }
+            var raw_data = from enrollments in _context.Enrollments
+                           join masterusers in _context.Usermasters on enrollments.StudentId equals masterusers.MasterId
+                           where enrollments.ClassId == data.classId
+                           select new
+                           {
+                               studentID = masterusers.MasterId,
+                               studentName = masterusers.FullName
+                           };
+            var student_data = raw_data.ToList();
+            return Ok(student_data);
+        }
+
 
     }
 }

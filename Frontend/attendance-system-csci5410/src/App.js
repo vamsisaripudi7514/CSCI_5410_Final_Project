@@ -9,6 +9,7 @@ import ClassAttendance from './student/ClassAttendance';
 import AttendanceDisplay from './student/AttendanceDisplay';
 import ClassManagement from './teacher/ClassManagement';
 import ClassAdd from './teacher/ClassAdd';
+import ClassStudents from './teacher/ClassStudents';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
           <Route path="/class-management" element={<ClassManagement/>} />
           <Route path="/mark-attendance" element={<MarkAttendance/>} />
           <Route path="/create-class" element={<ClassAdd/>}/>
+          <Route path="/class-students" element={<ClassStudents/>}/>
         </Routes>
       </div>
     </Router>
