@@ -107,6 +107,38 @@
   },
   {
     "ContainingType": "AttendanceSystem.Controllers.ClassesController",
+    "Method": "DeleteClassStudent",
+    "RelativePath": "Classes/drop-student",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "data",
+        "Type": "AttendanceSystem.DTOs.Classes.DeleteClassStudentDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AttendanceSystem.Controllers.ClassesController",
+    "Method": "GetClassStudens",
+    "RelativePath": "Classes/get-class-students",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "data",
+        "Type": "AttendanceSystem.DTOs.Attendance.GetClassStudentsDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AttendanceSystem.Controllers.ClassesController",
     "Method": "GetStudentIDs",
     "RelativePath": "Classes/getStudentId-file",
     "HttpMethod": "POST",

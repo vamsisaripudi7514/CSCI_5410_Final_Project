@@ -4,6 +4,7 @@ import { useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 function ClassManagement() {
     const location = useLocation();
     const navigate = useNavigate();
@@ -80,10 +81,17 @@ function ClassManagement() {
             console.error("Error generating report:", error);
         }
     }
-    async function handleDeleteClass(classId) {
-        if (!window.confirm("Are you sure you want to delete this class?")) {
-            return;
-        }
+    async function handleDeleteClass(classId, className) {
+        const result = await Swal.fire({
+            title: `Are you sure want to delete ${className}?`,
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        });
+        if (!result.isConfirmed) { return; }
         try {
             const response = await fetch("http://localhost:5092/classes/delete-class", {
                 method: "POST",
@@ -102,6 +110,12 @@ function ClassManagement() {
             }
             const data = await response.json();
             console.log("Class deleted:", data);
+            Swal.fire({
+                title: 'Action Completed',
+                text: `${className} has been deleted from the class list.`,
+                icon: 'success',
+                confirmButtonText: 'OK'
+            });
             fetchClasses();
         }
         catch (error) {
@@ -192,7 +206,7 @@ function ClassManagement() {
                                         onClick={() => { handleMarkAttendance(class_name.classId) }}>
 
                                         Mark Attendance</button>
-                                        <button className="btn btn-sm btn-warning" style={{ marginLeft: "10px" }}
+                                    <button className="btn btn-sm btn-warning" style={{ marginLeft: "10px" }}
                                         onClick={() => { handleViewStudents(class_name.classId) }}>
                                         View Students</button>
                                     <button className="btn btn-sm btn-primary" style={{ marginLeft: "10px" }}
@@ -202,7 +216,7 @@ function ClassManagement() {
 
 
                                     <button className="btn btn-sm btn-danger" style={{ marginLeft: "10px" }}
-                                        onClick={() => { handleDeleteClass(class_name.classId) }}>
+                                        onClick={() => { handleDeleteClass(class_name.classId, class_name.className) }}>
 
                                         Delete</button>
                                 </td>

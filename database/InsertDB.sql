@@ -5,7 +5,8 @@ USE AttendanceSystem;
 INSERT INTO UserMaster (master_id, full_name, email, role) VALUES 
     (30001, 'Teacher 1', 'teacher1@example.com', 'teacher'),
     (30002, 'Teacher 2', 'teacher2@example.com', 'teacher'),
-    (30003, 'Teacher 3', 'teacher3@example.com', 'teacher');
+    (30003, 'Teacher 3', 'teacher3@example.com', 'teacher'),
+    (30005, 'Teacher 5', 'teacher5@example.com', 'teacher');
 
 INSERT INTO UserMaster (master_id, full_name, email, role) VALUES 
     (50001, 'Student 1_1', 'student1_1@example.com', 'student'),
@@ -41,7 +42,8 @@ INSERT INTO UserMaster (master_id, full_name, email, role) VALUES
     (50027, 'Student 3_7', 'student3_7@example.com', 'student'),
     (50028, 'Student 3_8', 'student3_8@example.com', 'student'),
     (50029, 'Student 3_9', 'student3_9@example.com', 'student'),
-    (50030, 'Student 3_10', 'student3_10@example.com', 'student');
+    (50030, 'Student 3_10', 'student3_10@example.com', 'student'),
+    (50031, 'Alice','alice.example.com','student');
 
 
 INSERT INTO Users (user_id, username, password_hash) VALUES 
