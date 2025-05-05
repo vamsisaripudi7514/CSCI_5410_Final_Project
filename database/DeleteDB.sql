@@ -15,3 +15,4 @@ TRUNCATE TABLE UserMaster;
 
 SET FOREIGN_KEY_CHECKS = 1;
 
+-- DROP DATABASE IF EXISTS attendancesystem;

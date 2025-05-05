@@ -1,4 +1,5 @@
 ﻿using AttendanceSystem.DTOs.Attendance;
+using AttendanceSystem.DTOs.Classes;
 using AttendanceSystem.Models;
 using AttendanceSystem.Utility;
 using ClosedXML.Excel;
@@ -270,6 +271,25 @@ namespace AttendanceSystem.Controllers
             return Ok(student_data);
         }
 
+        [HttpPost("drop-student")]
+        public async Task<IActionResult> DeleteClassStudent([FromBody] DeleteClassStudentDTO data)
+        {
+            if (data == null || data.classID == null || data.studentID == null)
+            {
+                return BadRequest("Payload or Payload Data Missing!");
+            }
+
+            var studentToDrop = await _context.Enrollments
+                                .FirstOrDefaultAsync(e => e.ClassId == data.classID && e.StudentId == data.studentID);
+            if (studentToDrop == null)
+            {
+                return NotFound("Student not found, or you don't have the permission to perform the action!");
+            }
+            _context.Enrollments.Remove(studentToDrop);
+            await _context.SaveChangesAsync();
+
+            return Ok(new { message = "Student dropped successfully." });
+        }
 
     }
 }
